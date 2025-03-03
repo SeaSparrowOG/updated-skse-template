@@ -1,0 +1,17 @@
+{
+  "name": "example-plugin",
+  "version-string": "1.0.0",
+  "description": "Template for SKSE plugin built using commonlib. MIT License by default.",
+  "homepage": "",
+  "license": "MIT",
+  "dependencies": [
+    "boost-stl-interfaces",
+    "fmt",
+    "rsm-binary-io",
+    "spdlog",
+    "jsoncpp",
+    "simpleini",
+    "xbyak"
+  ],
+  "builtin-baseline": "ea295dff0b3e9e9caeb49d1225dc7272d3231cf1"
+}
