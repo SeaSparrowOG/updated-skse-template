@@ -105,7 +105,8 @@ extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface* a_s
 	serialization->SetLoadCallback(&Serialization::LoadCallback);
 	serialization->SetRevertCallback(&Serialization::RevertCallback);
 	Hooks::Install();
-
+	
 	SKSE::GetPapyrusInterface()->Register(Papyrus::RegisterFunctions);
+	//Just a comment to trigger a build.
 	return true;
 }
