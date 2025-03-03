@@ -42,12 +42,18 @@
       "binaryDir": "${sourceDir}/build"
     },
     {
+      "name": "full",
+      "hidden": true,
+      "binaryDir": "${sourceDir}/build-full",
+      "cacheVariables": {
+        "COMPILE_SCRIPTS": true,
+        "ARCHIVE_FOLDER": true
+      }
+    },
+    {
       "name": "test",
       "hidden": true,
-      "binaryDir": "${sourceDir}/build-test",
-      "cacheVariables": {
-        "BUILD_TEST": true
-      }
+      "binaryDir": "${sourceDir}/build-test"
     },
     {
       "name": "vs2022-windows-vcpkg-release",
@@ -71,12 +77,27 @@
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug"
       }
+    },
+    {
+      "name": "vs2022-windows-vcpkg-full",
+      "inherits": [
+        "cmake-dev",
+        "vcpkg",
+        "windows",
+        "vs2022",
+        "full"
+      ]
     }
   ],
   "buildPresets": [
     {
       "name": "Release",
       "configurePreset": "vs2022-windows-vcpkg-release",
+      "configuration": "Release"
+    },
+    {
+      "name": "Full-Release",
+      "configurePreset": "vs2022-windows-vcpkg-full",
       "configuration": "Release"
     },
     {
