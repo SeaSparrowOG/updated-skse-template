@@ -89,12 +89,15 @@ extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface* a_s
 	logger::info("Author: SeaSparrow"sv);
 	logger::info("=================================================");
 	SKSE::Init(a_skse);
-	SKSE::AllocTrampoline(14);
 
 	const auto ver = a_skse->RuntimeVersion();
 	if (ver < SKSE::RUNTIME_1_6_1130) {
 		return false;
 	}
+
+	Hooks::Install();
+
+	SKSE::GetPapyrusInterface()->Register(Papyrus::RegisterFunctions);
 
 	const auto messaging = SKSE::GetMessagingInterface();
 	messaging->RegisterListener(&MessageEventCallback);
@@ -104,9 +107,6 @@ extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface* a_s
 	serialization->SetSaveCallback(&Serialization::SaveCallback);
 	serialization->SetLoadCallback(&Serialization::LoadCallback);
 	serialization->SetRevertCallback(&Serialization::RevertCallback);
-	Hooks::Install();
-	
-	SKSE::GetPapyrusInterface()->Register(Papyrus::RegisterFunctions);
-	//Just a comment to trigger a build.
+
 	return true;
 }
