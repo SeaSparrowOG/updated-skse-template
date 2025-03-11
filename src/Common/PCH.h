@@ -3,6 +3,7 @@
 #include "RE/Skyrim.h"
 #include "SKSE/SKSE.h"
 
+#include <Include/CLibHelper/CLibHelper.h>
 #include <fstream>
 #include <spdlog/sinks/basic_file_sink.h>
 #include <json/json.h>

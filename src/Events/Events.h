@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Utilities/Utilities.h"
-
 namespace Events
 {
 	void Install();

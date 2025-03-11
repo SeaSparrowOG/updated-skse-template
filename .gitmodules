@@ -7,3 +7,6 @@
 [submodule "Tools/Bethesda-CMakeModules"]
 	path = Tools/Bethesda-CMakeModules
 	url = https://github.com/Exit-9B/BethesdaCMakeModules
+[submodule "External/CLibHelper"]
+	path = External/CLibHelper
+	url = https://github.com/SeaSparrowOG/clib-helper

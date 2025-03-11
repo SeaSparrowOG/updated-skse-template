@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Utilities/Utilities.h"
 #include "RE/Offset.h"
 
 namespace Hooks {

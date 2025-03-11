@@ -12,6 +12,9 @@ project(
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
+add_subdirectory(External/CLibHelper)
+include_directories(External/CLibHelper)
+
 get_filename_component(
 	Skyrim64Path
 	"[HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Bethesda Softworks\\Skyrim Special Edition;installed path]"

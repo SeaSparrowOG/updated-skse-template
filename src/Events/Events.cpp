@@ -1,6 +1,5 @@
 #include "events.h"
 
-
 namespace Events
 {
 	void Install() {
