@@ -14,7 +14,7 @@ namespace Hooks {
 			static void Install();
 			static void Hook();
 
-			inline static REL::ID addressID{ RE::Offset::Example::PleaseEditMe };
+			inline static REL::ID addressID{ REL::ID(0) };
 			inline static std::ptrdiff_t offset{ 0x0 };
 			inline static REL::Relocation<decltype(&Hook)> _hook;
 		};

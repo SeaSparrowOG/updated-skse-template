@@ -17,13 +17,6 @@ namespace Serialization {
 				return;
 			}
 		}
-		else {
-			RE::FormID nullID = 0x0;
-			if (!a_intfc->WriteRecordData(nullID)) {
-				logger::error("Failed to write FormID ({:08X})"sv, nullID);
-				return;
-			}
-		}
 	}
 
 	void LoadCallback(SKSE::SerializationInterface* a_intfc)

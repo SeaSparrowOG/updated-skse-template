@@ -7,40 +7,35 @@ namespace Data
 		[[maybe_unused]] RE::BSTEventSource<RE::TESQuestInitEvent>* a_eventSource)
 	{
 		using enum RE::BSEventNotifyControl;
-
-		const auto quest = RE::TESForm::LookupByID<RE::TESQuest>(a_event->formID);
-		if (quest && quest->formEditorID == QuestName) {
-			Initialize(quest);
-		}
 		return kContinue;
 	}
 
-	void ModObjectManager::Reload()
+	bool ModObjectManager::Reload()
 	{
+		logger::info("==========================================================");
+		logger::info("Preloading forms from {} attached on {}...", ScriptName, QuestName);
 		const auto quest = RE::TESForm::LookupByEditorID<RE::TESQuest>(QuestName);
-
 		if (!quest) {
-			logger::warn("ModObjectManager: Failed to lookup quest: {}", QuestName);
-			return;
+			logger::warn("  >Failed to lookup quest."sv);
+			return false;
 		}
-
-		Initialize(quest);
+		return Initialize(quest);
 	}
 
-	void ModObjectManager::Initialize(RE::TESQuest* a_quest)
+	bool ModObjectManager::Initialize(RE::TESQuest* a_quest)
 	{
 		const auto vm = RE::BSScript::Internal::VirtualMachine::GetSingleton();
 		if (!vm) {
-			logger::error("ModObjectManager: Failed to get VM");
-			return;
+			logger::error("  >Failed to get VM");
+			return false;
 		}
 
 		const auto bindPolicy = vm->GetObjectBindPolicy();
 		const auto handlePolicy = vm->GetObjectHandlePolicy();
 
 		if (!bindPolicy || !handlePolicy) {
-			logger::error("ModObjectManager: Failed to get VM object policies");
-			return;
+			logger::error("  >Failed to get VM object policies");
+			return false;
 		}
 
 		const auto handle = handlePolicy->GetHandleForObject(RE::TESQuest::FORMTYPE, a_quest);
@@ -57,6 +52,8 @@ namespace Data
 		}
 
 		vm->ResetAllBoundObjects(handle);
+		logger::info("  >Found {} Mod Objects."sv, properties.size());
+		return true;
 	}
 
 	RE::TESForm* ModObjectManager::Get(std::string_view a_key) const

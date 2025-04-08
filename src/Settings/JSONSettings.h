@@ -7,7 +7,7 @@ namespace Settings
 		class Holder : public Utilities::Singleton::ISingleton<Holder>
 		{
 		public:
-			void Read();
+			bool Read();
 		};
 	}
 }

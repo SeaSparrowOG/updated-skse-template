@@ -68,13 +68,20 @@ static void MessageEventCallback(SKSE::MessagingInterface::Message* a_msg)
 {
 	switch (a_msg->type) {
 	case SKSE::MessagingInterface::kDataLoaded:
-		Settings::INI::Holder::GetSingleton()->Read();
-		Settings::JSON::Holder::GetSingleton()->Read();
-		Data::ModObjectManager::GetSingleton()->RegisterListener();
-		Events::Install();
-		break;
-	case SKSE::MessagingInterface::kPostLoadGame:
-		Data::ModObjectManager::GetSingleton()->Reload();
+		if (!Settings::INI::Holder::GetSingleton()->Read()) {
+			SKSE::stl::report_and_fail("Failed to read INI settings."sv);
+		}
+		if (!Settings::JSON::Holder::GetSingleton()->Read()) {
+			SKSE::stl::report_and_fail("Failed to read JSON settings."sv);
+		}
+		if (!Data::ModObjectManager::GetSingleton()->Reload()) {
+			SKSE::stl::report_and_fail("Failed to preload ESP forms."sv);
+		}
+		if (!Events::Install()) {
+			SKSE::stl::report_and_fail("Failed to register event listeners."sv);
+		}
+		logger::info("==========================================================");
+		logger::info("Startup tasks finished, enjoy your game!");
 		break;
 	default:
 		break;
@@ -94,6 +101,8 @@ extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface* a_s
 	if (ver < SKSE::RUNTIME_1_6_1130) {
 		return false;
 	}
+
+	logger::info("Performing startup tasks..."sv);
 
 	Hooks::Install();
 

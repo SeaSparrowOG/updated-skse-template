@@ -4,8 +4,10 @@ namespace Hooks
 {
 	void Install()
 	{
-		SKSE::AllocTrampoline(1024);
-		HookClass::GetSingleton()->Install();
+		logger::info("==========================================================");
+		logger::info("Installing Hooks...");
+		// SKSE::AllocTrampoline(1024);
+		// HookClass::GetSingleton()->Install();
 	}
 
 	void HookClass::Install()
@@ -15,6 +17,7 @@ namespace Hooks
 
 	void HookClass::Hook1::Install()
 	{
+		logger::info("  >Installing hook 1"sv);
 		auto& trampoline = SKSE::GetTrampoline();
 		REL::Relocation<std::uintptr_t> target{ addressID, offset };
 

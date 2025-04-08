@@ -81,3 +81,7 @@ namespace stl {
         return reinterpret_cast<std::uintptr_t>((void*&)fn);
     }
 }
+
+// Used as a compile guard in certain templated function (see INISettings.h, if present)
+template <class T>
+inline constexpr bool always_false = false;

@@ -4,9 +4,12 @@ namespace RE
 {
 	namespace Offset
 	{
-		namespace Example
+		namespace Message
 		{
-			constexpr auto PleaseEditMe = REL::ID(0);
+			constexpr auto GetDescription = REL::ID(14552);
 		}
+
+		constexpr auto DebugNotification = REL::ID(52933);
+		constexpr auto CreateMessage = REL::ID(52269);
 	}
 }
